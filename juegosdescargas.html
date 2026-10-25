@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UNKNOWN PILLBOX // AGGRESSIVE GAMING ARCHIVE</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Google Fonts: Orbitron, Rajdhani & Chakra Petch -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@600;700;800&family=Chakra+Petch:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            f99: {
+              black: '#040507',
+              dark: '#080a0f',
+              panel: '#0e111a',
+              border: '#1b2438',
+              cyan: '#00f0ff',
+              red: '#ff003c',
+              yellow: '#ffe600',
+              purple: '#8000ff'
+            }
+          },
+          fontFamily: {
+            orbitron: ['Orbitron', 'sans-serif'],
+            rajdhani: ['Rajdhani', 'sans-serif'],
+            chakra: ['Chakra Petch', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background-color: #040507;
+      color: #f3f4f6;
+      overflow-x: hidden;
+    }
+
+    /* Aggressive Cyber Grid Background matching Overlay */
+    .bg-pillbox-grid {
+      background-image: 
+        radial-gradient(ellipse at 50% -20%, rgba(0, 240, 255, 0.15), transparent 70%),
+        radial-gradient(ellipse at 80% 60%, rgba(255, 0, 60, 0.1), transparent 50%),
+        linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+    }
+
+    /* Cyber Polygon Cuts */
+    .cyber-cut-hero {
+      clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+    }
+    .cyber-cut-card {
+      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+    }
+    .cyber-cut-btn {
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    }
+    .cyber-badge {
+      clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+    }
+
+    /* Cyan Neon Glows */
+    .glow-cyan {
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    }
+    .glow-cyan:hover {
+      box-shadow: 0 0 35px rgba(0, 240, 255, 0.8), inset 0 0 15px rgba(0, 240, 255, 0.3);
+    }
+    .glow-red {
+      box-shadow: 0 0 20px rgba(255, 0, 60, 0.4);
+    }
+    .glow-red:hover {
+      box-shadow: 0 0 35px rgba(255, 0, 60, 0.8), inset 0 0 15px rgba(255, 0, 60, 0.3);
+    }
+
+    /* CRT Scanlines Overlay */
+    .scanlines {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
+      background-size: 100% 4px;
+    }
+
+    /* Hazard Stripe Accent */
+    .hazard-stripe {
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(0, 240, 255, 0.15),
+        rgba(0, 240, 255, 0.15) 10px,
+        rgba(0, 0, 0, 0.8) 10px,
+        rgba(0, 0, 0, 0.8) 20px
+      );
+    }
+
+    /* Glitch Animation */
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+    .glitch-hover:hover {
+      animation: glitch 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+    }
+  </style>
+</head>
+<body class="bg-f99-black bg-pillbox-grid min-h-screen flex flex-col antialiased selection:bg-f99-cyan selection:text-black">
+
+  <!-- ================= TOP HAZARD BAR ================= -->
+  <div class="hazard-stripe border-b border-f99-cyan/30 py-1 px-4 text-center">
+    <p class="text-[10px] font-orbitron font-black text-f99-cyan uppercase tracking-[0.3em] flex items-center justify-center gap-3">
+      <i class="fa-solid fa-triangle-exclamation text-f99-cyan"></i>
+      SISTEMA EN LÍNEA // BÓVEDA UNKNOWN PILLBOX v4.9 // INTERFAZ CIBERNÉTICA NEÓN
+      <i class="fa-solid fa-triangle-exclamation text-f99-cyan"></i>
+    </p>
+  </div>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="sticky top-0 z-50 w-full bg-f99-dark/95 backdrop-blur-lg border-b border-f99-cyan/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- LOGO UNKNOWN PILLBOX -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-12 h-12 bg-f99-cyan text-black font-black text-2xl font-orbitron flex items-center justify-center cyber-cut-btn group-hover:bg-white transition-colors duration-300 glow-cyan">
+          <i class="fa-solid fa-skull text-xl"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-orbitron font-black text-2xl sm:text-3xl tracking-tighter text-white leading-none group-hover:text-f99-cyan transition-colors">
+            UNKNOWN<span class="text-f99-cyan">PILLBOX</span>
+          </span>
+          <span class="text-[9px] font-chakra text-f99-cyan uppercase tracking-[0.35em] font-bold">
+            REPOSITORIOS FORTUNE99 // SIN LÍMITES
+          </span>
+        </div>
+      </a>
+
+      <!-- Buscador Visual -->
+      <div class="hidden md:flex flex-1 max-w-md mx-6">
+        <div class="relative w-full">
+          <input 
+            type="text" 
+            id="search-input"
+            placeholder="[BUSCAR TÍTULO, REPACK O ISO...]" 
+            class="w-full bg-f99-black text-xs font-orbitron text-f99-cyan placeholder-gray-500 pl-10 pr-4 py-3 border border-f99-cyan/40 focus:outline-none focus:border-f99-cyan focus:bg-f99-panel transition-all uppercase tracking-wider cyber-cut-btn"
+          />
+          <i class="fa-solid fa-crosshairs absolute left-3.5 top-3.5 text-f99-cyan text-sm"></i>
+        </div>
+      </div>
+
+      <!-- Enlaces Nav -->
+      <nav class="hidden lg:flex items-center gap-6 font-orbitron text-xs font-extrabold tracking-widest">
+        <button onclick="filterCategory('all')" class="nav-btn text-f99-cyan hover:text-white transition-colors flex items-center gap-2">
+          <i class="fa-solid fa-radiation text-f99-cyan"></i> TODO
+        </button>
+        <button onclick="filterCategory('Acción')" class="nav-btn text-gray-400 hover:text-f99-cyan transition-colors">ACCIÓN</button>
+        <button onclick="filterCategory('RPG')" class="nav-btn text-gray-400 hover:text-f99-cyan transition-colors">RPG</button>
+        <button onclick="filterCategory('Estrategia')" class="nav-btn text-gray-400 hover:text-f99-cyan transition-colors">ESTRATEGIA</button>
+        <button onclick="filterCategory('Cyber')" class="nav-btn text-gray-400 hover:text-f99-cyan transition-colors">CYBERPUNK</button>
+      </nav>
+
+      <!-- Menú Móvil Botón -->
+      <button id="mobile-menu-btn" class="lg:hidden text-f99-cyan hover:text-white text-2xl focus:outline-none">
+        <i class="fa-solid fa-bars-staggered"></i>
+      </button>
+
+    </div>
+
+    <!-- Menú Desplegable Móvil -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-f99-dark border-b border-f99-cyan/40 px-4 pt-4 pb-6 space-y-3 font-orbitron text-xs">
+      <div class="mb-4">
+        <input 
+          type="text" 
+          id="mobile-search-input"
+          placeholder="[BUSCAR JUEGO...]" 
+          class="w-full bg-f99-black text-xs text-f99-cyan placeholder-gray-500 px-4 py-3 border border-f99-cyan focus:outline-none uppercase cyber-cut-btn"
+        />
+      </div>
+      <button onclick="filterCategory('all'); toggleMobileMenu()" class="block w-full text-left py-2.5 text-f99-cyan font-bold">TODOS LOS ARCHIVOS</button>
+      <button onclick="filterCategory('Acción'); toggleMobileMenu()" class="block w-full text-left py-2.5 text-gray-300 hover:text-f99-cyan">ACCIÓN / BATALLA</button>
+      <button onclick="filterCategory('RPG'); toggleMobileMenu()" class="block w-full text-left py-2.5 text-gray-300 hover:text-f99-cyan">RPG / FANTASÍA OSCURA</button>
+      <button onclick="filterCategory('Estrategia'); toggleMobileMenu()" class="block w-full text-left py-2.5 text-gray-300 hover:text-f99-cyan">ESTRATEGIA HARDCORE</button>
+      <button onclick="filterCategory('Cyber'); toggleMobileMenu()" class="block w-full text-left py-2.5 text-f99-cyan font-bold">CYBERPUNK / DISTOPÍA</button>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+
+    <!-- ================= HERO BANNER ================= -->
+    <section class="relative pt-10 pb-16 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Hero Text -->
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-f99-cyan/10 border-2 border-f99-cyan text-f99-cyan text-xs font-black font-orbitron uppercase tracking-widest cyber-badge">
+              <i class="fa-solid fa-biohazard text-f99-cyan animate-pulse"></i> BÓVEDA OVERDRIVE // EDICIÓN FORTUNE99
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black font-orbitron tracking-tight leading-none text-white uppercase italic">
+              BASE DE <span class="text-transparent bg-clip-text bg-gradient-to-r from-f99-cyan via-white to-f99-cyan">DATOS NEÓN</span> UNKNOWN PILLBOX
+            </h1>
+
+            <p class="text-gray-300 text-base sm:text-xl font-chakra max-w-2xl mx-auto lg:mx-0 leading-relaxed uppercase tracking-wide">
+              Descargas directas sin esperas. Servidores de alta velocidad, repositorios verificados e instalación ultra limpia.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+              <a href="#games" class="px-8 py-4 bg-f99-cyan text-black font-orbitron font-black cyber-cut-btn glow-cyan hover:bg-white transition-all duration-300 flex items-center gap-3 text-sm tracking-widest uppercase glitch-hover">
+                <i class="fa-solid fa-download text-base"></i> VER ÚLTIMOS LANZAMIENTOS
+              </a>
+              <a href="#categories" class="px-8 py-4 bg-f99-panel border-2 border-f99-cyan text-f99-cyan font-orbitron font-black cyber-cut-btn hover:bg-f99-cyan hover:text-black transition-all duration-300 flex items-center gap-2 text-sm tracking-widest uppercase glow-cyan">
+                <i class="fa-solid fa-filter"></i> FILTRAR CATEGORÍAS
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Frame -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto max-w-md lg:max-w-none bg-f99-panel p-2 border-2 border-f99-cyan cyber-cut-hero shadow-[0_0_40px_rgba(0,240,255,0.25)]">
+              
+              <div class="relative h-[400px] overflow-hidden cyber-cut-hero border border-f99-cyan/50">
+                <img 
+                  src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1000&q=80" 
+                  alt="UNKNOWN PILLBOX Gaming Setup" 
+                  class="w-full h-full object-cover object-center scale-105 hover:scale-110 transition-transform duration-700 brightness-90 contrast-125"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-f99-black via-f99-black/30 to-transparent"></div>
+                <div class="absolute inset-0 scanlines opacity-50 pointer-events-none"></div>
+
+                <div class="absolute top-3 left-3 bg-f99-black/90 px-3 py-1 border border-f99-cyan text-f99-cyan font-orbitron text-[10px] font-black tracking-widest flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-f99-cyan animate-ping"></span> ENLACE DE TRANSMISIÓN PILLBOX
+                </div>
+
+                <div class="absolute bottom-4 left-4 right-4 bg-f99-dark/95 p-3 border-l-4 border-f99-cyan border-t border-r border-b border-f99-border">
+                  <div class="flex justify-between items-center">
+                    <div>
+                      <span class="text-[9px] text-f99-cyan font-orbitron uppercase font-bold tracking-widest">DESTACADO F99</span>
+                      <h4 class="text-xl font-extrabold text-white font-orbitron tracking-wide">CYBER SLAYER 2099</h4>
+                    </div>
+                    <span class="px-2.5 py-1 bg-f99-cyan text-black font-black font-orbitron text-xs cyber-badge">
+                      ISO COMPLETA
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CATEGORIES BAR ================= -->
+    <section id="categories" class="py-6 border-y-2 border-f99-cyan/30 bg-f99-dark/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 font-orbitron text-xs font-black">
+          <button onclick="filterCategory('all')" class="cat-btn active px-6 py-3 bg-f99-cyan text-black cyber-cut-btn tracking-widest transition-all glow-cyan">
+            <i class="fa-solid fa-layer-group mr-2"></i>TODOS LOS ARCHIVOS
+          </button>
+          <button onclick="filterCategory('Acción')" class="cat-btn px-6 py-3 bg-f99-panel border border-f99-border text-gray-300 hover:border-f99-cyan hover:text-f99-cyan cyber-cut-btn transition-all tracking-widest">
+            <i class="fa-solid fa-gun mr-2"></i>ACCIÓN
+          </button>
+          <button onclick="filterCategory('RPG')" class="cat-btn px-6 py-3 bg-f99-panel border border-f99-border text-gray-300 hover:border-f99-cyan hover:text-f99-cyan cyber-cut-btn transition-all tracking-widest">
+            <i class="fa-solid fa-hat-wizard mr-2"></i>RPG
+          </button>
+          <button onclick="filterCategory('Estrategia')" class="cat-btn px-6 py-3 bg-f99-panel border border-f99-border text-gray-300 hover:border-f99-cyan hover:text-f99-cyan cyber-cut-btn transition-all tracking-widest">
+            <i class="fa-solid fa-chess-knight mr-2"></i>ESTRATEGIA
+          </button>
+          <button onclick="filterCategory('Cyber')" class="cat-btn px-6 py-3 bg-f99-panel border border-f99-border text-gray-300 hover:border-f99-cyan hover:text-f99-cyan cyber-cut-btn transition-all tracking-widest">
+            <i class="fa-solid fa-terminal mr-2"></i>CYBERPUNK
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GRILLA DE JUEGOS ================= -->
+    <section id="games" class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b-2 border-f99-cyan/40">
+          <div>
+            <div class="text-f99-cyan font-orbitron text-xs font-black tracking-[0.3em] uppercase mb-1 flex items-center gap-2">
+              <i class="fa-solid fa-database"></i> BÓVEDA UNKNOWN PILLBOX
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-black font-orbitron tracking-tight text-white uppercase italic">
+              CATÁLOGO DE <span class="text-f99-cyan">DESCARGAS DIRECTAS</span>
+            </h2>
+          </div>
+          <span id="game-count" class="text-xs font-orbitron font-black text-f99-cyan border-2 border-f99-cyan/50 px-4 py-2 bg-f99-dark mt-3 md:mt-0 tracking-widest uppercase cyber-badge">
+            MOSTRANDO 4 EXPEDIENTES
+          </span>
+        </div>
+
+        <!-- Cards Grid -->
+        <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Card 1 -->
+          <div class="game-card group bg-f99-panel border-2 border-f99-border hover:border-f99-cyan cyber-cut-card transition-all duration-300 hover:-translate-y-2 flex flex-col relative glow-cyan" data-category="Acción Cyber" data-title="Neon Carnage 2099">
+            <div class="relative overflow-hidden h-52 border-b-2 border-f99-border">
+              <img 
+                src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" 
+                alt="Neon Carnage 2099" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 brightness-90 group-hover:brightness-110"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-f99-panel via-transparent to-transparent opacity-80"></div>
+              <span class="absolute top-3 right-3 bg-f99-black text-f99-cyan border border-f99-cyan text-[10px] font-orbitron font-black px-2.5 py-0.5 tracking-wider cyber-badge">
+                PC / WIN 11
+              </span>
+            </div>
+            
+            <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+              <div>
+                <div class="text-[10px] font-black text-f99-cyan font-orbitron tracking-widest uppercase mb-1 flex items-center justify-between">
+                  <span>ACCIÓN • CYBERPUNK</span>
+                  <span class="text-f99-cyan">v2.04 COMPLETO</span>
+                </div>
+                <h3 class="text-2xl font-black font-orbitron text-white group-hover:text-f99-cyan transition-colors uppercase italic">
+                  Neon Carnage
+                </h3>
+                <p class="text-gray-400 text-xs mt-2 line-clamp-2 font-chakra uppercase">
+                  Shooter futurista con armas de plasma, combate fluido y banda sonora electro.
+                </p>
+              </div>
+
+              <div class="pt-2">
+                <a 
+                  href="#" 
+                  onclick="openDownloadModal('Neon Carnage 2099', 'Acción / Cyberpunk', 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80', '68.4 GB', 'v2.04 DESBLOQUEADO'); return false;"
+                  class="w-full py-3.5 bg-f99-cyan hover:bg-white text-black font-orbitron font-black text-xs cyber-cut-btn transition-all flex items-center justify-center gap-2 glow-cyan uppercase tracking-widest glitch-hover"
+                >
+                  <i class="fa-solid fa-download"></i> DESCARGAR AHORA
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="game-card group bg-f99-panel border-2 border-f99-border hover:border-f99-cyan cyber-cut-card transition-all duration-300 hover:-translate-y-2 flex flex-col relative glow-cyan" data-category="RPG" data-title="Eldoria: Blood Covenant">
+            <div class="relative overflow-hidden h-52 border-b-2 border-f99-border">
+              <img 
+                src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80" 
+                alt="Eldoria Covenant" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 brightness-90 group-hover:brightness-110"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-f99-panel via-transparent to-transparent opacity-80"></div>
+              <span class="absolute top-3 right-3 bg-f99-black text-f99-cyan border border-f99-cyan text-[10px] font-orbitron font-black px-2.5 py-0.5 tracking-wider cyber-badge">
+                PC / STEAM
+              </span>
+            </div>
+
+            <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+              <div>
+                <div class="text-[10px] font-black text-f99-cyan font-orbitron tracking-widest uppercase mb-1 flex items-center justify-between">
+                  <span>RPG • FANTASÍA OSCURA</span>
+                  <span class="text-f99-cyan">DLCS INCLUIDOS</span>
+                </div>
+                <h3 class="text-2xl font-black font-orbitron text-white group-hover:text-f99-cyan transition-colors uppercase italic">
+                  Eldoria Covenant
+                </h3>
+                <p class="text-gray-400 text-xs mt-2 line-clamp-2 font-chakra uppercase">
+                  Fantasía oscura de acción implacable. Batallas contra jefes masivos y magia.
+                </p>
+              </div>
+
+              <div class="pt-2">
+                <a 
+                  href="#" 
+                  onclick="openDownloadModal('Eldoria: Blood Covenant', 'RPG / Fantasía Oscura', 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80', '112.0 GB', 'v1.12 COMPLETO'); return false;"
+                  class="w-full py-3.5 bg-f99-cyan hover:bg-white text-black font-orbitron font-black text-xs cyber-cut-btn transition-all flex items-center justify-center gap-2 glow-cyan uppercase tracking-widest glitch-hover"
+                >
+                  <i class="fa-solid fa-download"></i> DESCARGAR AHORA
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="game-card group bg-f99-panel border-2 border-f99-border hover:border-f99-cyan cyber-cut-card transition-all duration-300 hover:-translate-y-2 flex flex-col relative glow-cyan" data-category="Estrategia Cyber" data-title="Stellar War: Protocol ZERO">
+            <div class="relative overflow-hidden h-52 border-b-2 border-f99-border">
+              <img 
+                src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" 
+                alt="Stellar War Protocol" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 brightness-90 group-hover:brightness-110"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-f99-panel via-transparent to-transparent opacity-80"></div>
+              <span class="absolute top-3 right-3 bg-f99-black text-f99-cyan border border-f99-cyan text-[10px] font-orbitron font-black px-2.5 py-0.5 tracking-wider cyber-badge">
+                PC / LINUX
+              </span>
+            </div>
+
+            <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+              <div>
+                <div class="text-[10px] font-black text-f99-cyan font-orbitron tracking-widest uppercase mb-1 flex items-center justify-between">
+                  <span>ESTRATEGIA • SCI-FI</span>
+                  <span class="text-f99-cyan">PARCHE ONLINE</span>
+                </div>
+                <h3 class="text-2xl font-black font-orbitron text-white group-hover:text-f99-cyan transition-colors uppercase italic">
+                  Protocol ZERO
+                </h3>
+                <p class="text-gray-400 text-xs mt-2 line-clamp-2 font-chakra uppercase">
+                  Conquista galáctica. Comanda flotas de guerra cibernéticas y estaciones espaciales.
+                </p>
+              </div>
+
+              <div class="pt-2">
+                <a 
+                  href="#" 
+                  onclick="openDownloadModal('Stellar War: Protocol ZERO', 'Estrategia Sci-Fi', 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80', '45.8 GB', 'v3.0.1 FIX'); return false;"
+                  class="w-full py-3.5 bg-f99-cyan hover:bg-white text-black font-orbitron font-black text-xs cyber-cut-btn transition-all flex items-center justify-center gap-2 glow-cyan uppercase tracking-widest glitch-hover"
+                >
+                  <i class="fa-solid fa-download"></i> DESCARGAR AHORA
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="game-card group bg-f99-panel border-2 border-f99-border hover:border-f99-cyan cyber-cut-card transition-all duration-300 hover:-translate-y-2 flex flex-col relative glow-cyan" data-category="Acción Cyber" data-title="Apex Overkill">
+            <div class="relative overflow-hidden h-52 border-b-2 border-f99-border">
+              <img 
+                src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" 
+                alt="Apex Overkill" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 brightness-90 group-hover:brightness-110"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-f99-panel via-transparent to-transparent opacity-80"></div>
+              <span class="absolute top-3 right-3 bg-f99-black text-f99-cyan border border-f99-cyan text-[10px] font-orbitron font-black px-2.5 py-0.5 tracking-wider cyber-badge">
+                MULTIPLATAFORMA
+              </span>
+            </div>
+
+            <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+              <div>
+                <div class="text-[10px] font-black text-f99-cyan font-orbitron tracking-widest uppercase mb-1 flex items-center justify-between">
+                  <span>ACCIÓN • TÁCTICO</span>
+                  <span class="text-f99-cyan">REPACK V8</span>
+                </div>
+                <h3 class="text-2xl font-black font-orbitron text-white group-hover:text-f99-cyan transition-colors uppercase italic">
+                  Apex Overkill
+                </h3>
+                <p class="text-gray-400 text-xs mt-2 line-clamp-2 font-chakra uppercase">
+                  Operaciones especiales de incursión armada en metrópolis distópicas.
+                </p>
+              </div>
+
+              <div class="pt-2">
+                <a 
+                  href="#" 
+                  onclick="openDownloadModal('Apex Overkill', 'Acción Táctica / Cyber', 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80', '82.1 GB', 'v1.5.0 REPACK'); return false;"
+                  class="w-full py-3.5 bg-f99-cyan hover:bg-white text-black font-orbitron font-black text-xs cyber-cut-btn transition-all flex items-center justify-center gap-2 glow-cyan uppercase tracking-widest glitch-hover"
+                >
+                  <i class="fa-solid fa-download"></i> DESCARGAR AHORA
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-f99-dark border-t-2 border-f99-cyan/40 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        
+        <div class="space-y-4 md:col-span-1">
+          <a href="#" class="flex items-center gap-2">
+            <div class="w-9 h-9 bg-f99-cyan text-black font-black font-orbitron flex items-center justify-center cyber-cut-btn">
+              <i class="fa-solid fa-skull text-sm"></i>
+            </div>
+            <span class="font-orbitron font-black text-2xl text-white tracking-tighter">UNKNOWN<span class="text-f99-cyan">PILLBOX</span></span>
+          </a>
+          <p class="text-gray-400 text-xs leading-relaxed font-chakra uppercase">
+            REPOSITORIO PRIVADO DE ALTA VELOCIDAD // ESTÉTICA FORTUNE99 NEÓN.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-black font-orbitron text-f99-cyan uppercase tracking-widest mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-terminal text-f99-cyan"></i> ÍNDICE DE DATOS
+          </h4>
+          <ul class="space-y-2 text-xs font-bold font-orbitron text-gray-400">
+            <li><button onclick="filterCategory('Acción')" class="hover:text-f99-cyan transition-colors">// ACCIÓN / SHOOTERS</button></li>
+            <li><button onclick="filterCategory('RPG')" class="hover:text-f99-cyan transition-colors">// RPG / FANTASÍA OSCURA</button></li>
+            <li><button onclick="filterCategory('Estrategia')" class="hover:text-f99-cyan transition-colors">// ESTRATEGIA Y GUERRA</button></li>
+            <li><button onclick="filterCategory('Cyber')" class="hover:text-f99-cyan transition-colors">// SECTOR CYBERPUNK</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-black font-orbitron text-f99-cyan uppercase tracking-widest mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-f99-cyan"></i> PROTOCOLOS F99
+          </h4>
+          <ul class="space-y-2 text-xs font-bold font-orbitron text-gray-400">
+            <li><a href="#" class="hover:text-f99-cyan transition-colors">// SERVIDORES DEDICADOS</a></li>
+            <li><a href="#" class="hover:text-f99-cyan transition-colors">// TÉRMINOS UNKNOWN PILLBOX</a></li>
+            <li><a href="#" class="hover:text-f99-cyan transition-colors">// VERIFICADOR SHA256</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-black font-orbitron text-f99-cyan uppercase tracking-widest mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-network-wired text-f99-cyan"></i> REDES Y COMUNIDAD
+          </h4>
+          <div class="flex items-center gap-3">
+            <a href="#" class="w-10 h-10 bg-f99-panel border border-f99-border flex items-center justify-center text-gray-300 hover:text-f99-cyan hover:border-f99-cyan cyber-cut-btn transition-all glow-cyan">
+              <i class="fa-brands fa-discord text-lg"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-f99-panel border border-f99-border flex items-center justify-center text-gray-300 hover:text-f99-cyan hover:border-f99-cyan cyber-cut-btn transition-all glow-cyan">
+              <i class="fa-brands fa-telegram text-lg"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-f99-panel border border-f99-border flex items-center justify-center text-gray-300 hover:text-f99-cyan hover:border-f99-cyan cyber-cut-btn transition-all glow-cyan">
+              <i class="fa-brands fa-x-twitter text-lg"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-f99-panel border border-f99-border flex items-center justify-center text-gray-300 hover:text-f99-cyan hover:border-f99-cyan cyber-cut-btn transition-all glow-cyan">
+              <i class="fa-brands fa-youtube text-lg"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-8 border-t border-f99-border text-center text-xs text-gray-500 font-orbitron flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p>&copy; 2026 UNKNOWN PILLBOX // EDICIÓN FORTUNE99. TODOS LOS DERECHOS RESERVADOS.</p>
+        <p class="text-[10px] text-f99-cyan tracking-widest font-black uppercase flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-f99-cyan animate-ping"></span> ESTADO DE LA BÓVEDA // EN LÍNEA
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MODAL DESCARGA ================= -->
+  <div id="download-modal" class="fixed inset-0 z-50 hidden bg-f99-black/95 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bg-f99-panel border-2 border-f99-cyan cyber-cut-card max-w-lg w-full p-6 relative shadow-[0_0_60px_rgba(0,240,255,0.3)] space-y-5">
+      
+      <button onclick="closeDownloadModal()" class="absolute top-4 right-4 text-f99-cyan hover:text-white text-2xl font-black focus:outline-none">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div id="modal-img-container" class="h-48 border-2 border-f99-border relative overflow-hidden cyber-cut-btn">
+        <img id="modal-img" src="" alt="Download Cover" class="w-full h-full object-cover brightness-90"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-f99-panel via-transparent to-transparent"></div>
+        <div class="absolute top-3 left-3 bg-f99-black/90 px-3 py-1 border border-f99-cyan text-f99-cyan font-orbitron text-[10px] font-black tracking-widest">
+          SERVIDOR // DIRECTO-F99
+        </div>
+      </div>
+
+      <div>
+        <span id="modal-category" class="text-[10px] font-black text-f99-cyan font-orbitron uppercase tracking-widest"></span>
+        <h3 id="modal-title" class="text-3xl font-black font-orbitron text-white uppercase italic mt-1"></h3>
+        <p class="text-xs text-gray-400 font-chakra uppercase mt-1">Enlace cifrado con máxima velocidad de ancho de banda.</p>
+      </div>
+
+      <div class="bg-f99-dark p-4 border border-f99-border space-y-2 text-xs font-orbitron">
+        <div class="flex justify-between text-gray-400">
+          <span>TAMAÑO DE ARCHIVO:</span>
+          <span id="modal-size" class="text-f99-cyan font-black">-- GB</span>
+        </div>
+        <div class="flex justify-between text-gray-400">
+          <span>ESTADO DEL REPACK:</span>
+          <span id="modal-ver" class="text-f99-cyan font-black">--</span>
+        </div>
+        <div class="flex justify-between text-gray-400">
+          <span>CIFRADO Y SEGURIDAD:</span>
+          <span class="text-f99-cyan font-black">FORTUNE99 OK</span>
+        </div>
+      </div>
+
+      <div class="pt-2">
+        <a 
+          href="https://example.com/download-link" 
+          target="_blank" 
+          class="w-full py-4 bg-f99-cyan hover:bg-white text-black font-orbitron font-black text-sm cyber-cut-btn transition-all flex items-center justify-center gap-3 glow-cyan uppercase tracking-widest glitch-hover"
+        >
+          <i class="fa-solid fa-cloud-arrow-down text-lg"></i> INICIAR DESCARGA DIRECTA
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    // Menú Móvil
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    function toggleMobileMenu() {
+      mobileMenu.classList.toggle('hidden');
+    }
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+    // Filtrar Categorías
+    function filterCategory(category) {
+      const cards = document.querySelectorAll('.game-card');
+      const buttons = document.querySelectorAll('.cat-btn');
+      let visibleCount = 0;
+
+      buttons.forEach(btn => {
+        if (btn.textContent.includes(category.toUpperCase()) || (category === 'all' && btn.textContent.includes('TODOS'))) {
+          btn.classList.add('bg-f99-cyan', 'text-black', 'glow-cyan');
+          btn.classList.remove('bg-f99-panel', 'text-gray-300');
+        } else {
+          btn.classList.remove('bg-f99-cyan', 'text-black', 'glow-cyan');
+          btn.classList.add('bg-f99-panel', 'text-gray-300');
+        }
+      });
+
+      cards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        if (category === 'all' || cardCategory.includes(category)) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.getElementById('game-count').textContent = `MOSTRANDO ${visibleCount} EXPEDIENTES`;
+    }
+
+    // Buscador
+    function handleSearch(query) {
+      const cards = document.querySelectorAll('.game-card');
+      const searchTerm = query.toLowerCase().trim();
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const title = card.getAttribute('data-title').toLowerCase();
+        const category = card.getAttribute('data-category').toLowerCase();
+
+        if (title.includes(searchTerm) || category.includes(searchTerm)) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.getElementById('game-count').textContent = `MOSTRANDO ${visibleCount} EXPEDIENTES`;
+    }
+
+    document.getElementById('search-input').addEventListener('input', (e) => handleSearch(e.target.value));
+    document.getElementById('mobile-search-input').addEventListener('input', (e) => handleSearch(e.target.value));
+
+    // Modal de Descarga
+    const modal = document.getElementById('download-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalCategory = document.getElementById('modal-category');
+    const modalImg = document.getElementById('modal-img');
+    const modalSize = document.getElementById('modal-size');
+    const modalVer = document.getElementById('modal-ver');
+
+    function openDownloadModal(title, category, imgSrc, size, ver) {
+      modalTitle.textContent = title;
+      modalCategory.textContent = category;
+      modalImg.src = imgSrc;
+      modalSize.textContent = size;
+      modalVer.textContent = ver;
+      modal.classList.remove('hidden');
+    }
+
+    function closeDownloadModal() {
+      modal.classList.add('hidden');
+    }
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeDownloadModal();
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.game-card');
+      document.getElementById('game-count').textContent = `MOSTRANDO ${cards.length} EXPEDIENTES`;
+    });
+  </script>
+
+</body>
+</html>
